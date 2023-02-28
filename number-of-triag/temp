@@ -1,0 +1,31 @@
+
+int * parseInput(char input[], unsigned int size){
+  
+  int * result = (int *)malloc(256 * sizeof(unsigned int));
+  memset(result, 0b0, sizeof(result));
+
+  // read while 0 terminator is reached
+  int i = 0, insert_pos = 0;
+  while (input[i] != 0){
+    if (input[i] >= '0' && input[i] <= '9'){
+      result[insert_pos] = atoi(input + i * sizeof(char));
+      insert_pos++;
+      while (input[i] >= '0' && input[i] <= '9'){
+        i++;
+      }
+      i--; 
+    }
+
+    i++;
+  }
+  return result; 
+}
+
+  char buff[INPUT_BUFF + 1];
+  printf("Enter an array of non-negative numbers separated by ' '\n");
+  fgets(buff, INPUT_BUFF, stdin);
+  //printf("Entered string: '%s'", buff);
+  int returnSize = 0;
+   
+  int * parsed_input = parseInput(buff, INPUT_BUFF + 1);
+  printArr(parsed_input, sizeof(parsed_input)/sizeof(unsigned int));
